@@ -4,49 +4,17 @@ import java.util.Scanner;
 
 class Shape{
 	
-	public double h;  
-	public double w; 
 	public double a;
-  
-	public void setValues(double height, double width){
-	    this.h = height;
-	    this.w = width;
-	}
-	 
+  	 
 	public void setValues(double side){
 	   this.a = side;
 	}
   
-    public double getHeight(){
-       return h;
-    }
-	     
-    public double getWidth(){
-       return w;
-    }    
-	
     public double getSide(){
 	   return a;
     }
     
 }
-
-class Rectangle extends Shape{
-	
-	public double area(){
-		return getWidth()*getHeight();
-	}
-	
-}
-
-class Triangle extends Shape{ 
-	
-    public double area() 
-    {
-        return (getHeight() * getWidth())/2;
-    }
-    
-}    
 
 class Circle extends Shape{
 	
@@ -57,7 +25,44 @@ class Circle extends Shape{
 
 }
 
-class Square extends Shape{
+class NonCircular extends Shape{
+	
+	public double h;  
+	public double w; 
+	
+	public void setValues(double height, double width){
+	    this.h = height;
+	    this.w = width;
+	}
+	
+	public double getHeight(){
+	    return h;
+	}
+		     
+	public double getWidth(){
+	    return w;
+	}  
+	
+}
+
+class Rectangle extends NonCircular{
+	
+	public double area(){
+		return getWidth()*getHeight();
+	}
+	
+}
+
+class Triangle extends NonCircular{ 
+	
+    public double area() 
+    {
+        return (getHeight() * getWidth())/2;
+    }
+    
+}  
+
+class Square extends NonCircular{
 	
 	public double area(){
 		return (getSide()*getSide());
@@ -65,16 +70,14 @@ class Square extends Shape{
 	
 }
 
-
-public class ShapeArea{
+public class Areas{
 	
 	public static void main(String[] args)
     {
-    
-		Shape shape;
+		
+		NonCircular shape;
 		
 		Scanner sc = new Scanner(System.in);
-		
 		System.out.println("Enter the valid shape:");
 		String str = sc.next();
 		double a,b,h;
@@ -101,8 +104,8 @@ public class ShapeArea{
 			System.out.println("Enter the radius:");
 			a = sc.nextFloat();
 			Circle ci = new Circle();
-			shape = ci;
-			shape.setValues(a);
+			Shape shapes = ci;
+			shapes.setValues(a);
 			System.out.println("Area of the Triangle : " + ci.area());			
 		}else if(str.equals("Square")){
 			System.out.println("Enter the side:");
@@ -116,7 +119,4 @@ public class ShapeArea{
 		}
 		
     }
-	
 }
-
-
