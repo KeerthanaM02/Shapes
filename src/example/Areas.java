@@ -1,5 +1,7 @@
 package example;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 class Shape{
@@ -80,18 +82,44 @@ class Square extends NonCircular{
 	
 }
 
+class Result{
+	public String shape,color;
+	public double area;
+	
+	public void setResult(String shape,String color,double area){
+		this.shape = shape;
+		this.color = color;
+		this.area = area;
+	}
+		
+	public void print(){
+		System.out.println("Shape: " + this.shape);
+		System.out.println("Color: " + this.color);
+		System.out.println("Area: " + this.area);
+	}
+}
+
 public class Areas {
 	
 	public static void main(String[] args)
     {
 		Shape shape;
 		Scanner sc = new Scanner(System.in);
-		System.out.println("Enter the valid shape:");
-		String str = sc.next();
 		double r,b,h;
 		String clr;
 		
-		if(str.equals("Circle")){
+		List<Result> result = new ArrayList<Result>();
+		
+		
+		while(true){
+			
+		System.out.println("Enter the valid shape:");
+		String str = sc.next();
+		Result res = new Result();
+			
+		switch(str){
+				
+		case "Circle":{
 			System.out.println("Enter the radius:");
 			r = sc.nextDouble();
 			System.out.println("Enter the color:");
@@ -100,9 +128,14 @@ public class Areas {
 			shape = ci;
 			shape.setColor(clr);
 			ci.setRadius(r);
-			System.out.println("Color of the Triangle : " + shape.getColor());	
-			System.out.println("Area of the Triangle : " + ci.area());			
-		}else if(str.equals("Rectangle")){
+			res.setResult(str, clr, ci.area());
+			result.add(res);
+			/*System.out.println("Shape :" + str);
+			System.out.println("Color of the Circle : " + shape.getColor());	
+			System.out.println("Area of the Circle : " + ci.area());	*/
+			break;
+		}
+		case "Rectangle":{
 			System.out.println("Enter the breath:");
 			b = sc.nextDouble();
 			System.out.println("Enter the height:");
@@ -113,9 +146,11 @@ public class Areas {
 			shape = rect;
 			shape.setColor(clr);
 			rect.setValues(h,b);
-			System.out.println("Color of the Rectangle : " + shape.getColor());	
-			System.out.println("Area of the Rectangle : " + rect.area());			
-		}else if(str.equals("Triangle")){
+			res.setResult(str, clr, rect.area());
+			result.add(res);
+			break;
+		}
+		case "Triangle":{
 			System.out.println("Enter the breath:");
 			b = sc.nextDouble();
 			System.out.println("Enter the height:");
@@ -126,9 +161,11 @@ public class Areas {
 			shape = tri;
 			shape.setColor(clr);
 			tri.setValues(h,b);
-			System.out.println("Color of the Triangle : " + shape.getColor());
-			System.out.println("Area of the Triangle : " + tri.area());			
-		}else if(str.equals("Square")){
+			res.setResult(str, clr, tri.area());
+			result.add(res);
+			break;
+		}
+		case "Square":{
 			System.out.println("Enter the side:");
 			b = sc.nextDouble();
 			System.out.println("Enter the Color:");
@@ -137,11 +174,20 @@ public class Areas {
 			shape = sq;
 			shape.setColor(clr);
 			sq.setValues(b,b);
-			System.out.println("Color of the Square : " + shape.getColor());
-			System.out.println("Area of the Square : " + sq.area());			
-		}else{
-			System.out.println("Invalid Parameter");
+			res.setResult(str, clr, sq.area());
+			result.add(res);
+			break;
 		}
+		case "Exit":{
+			for(int i=0;i<result.size();i++){
+				result.get(i).print();
+			}
+			return;
+		}
+		
+	     }
+		
+	 }
     }
 
 }
