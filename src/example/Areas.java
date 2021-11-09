@@ -12,43 +12,70 @@ class Shape{
 	public String getColor(){
 	   return clr;
 	}
-	public double area(double l,double b){
-		return 0;
-	}
-	public double area(double r){
+	public double area(){
 		return 0;
 	}
 }
 
 class Circle extends Shape{
 	
-	public double area(double r){
+	public double radius;
+	
+	public void setRadius(double radius){
+		this.radius = radius;
+	}
+	  
+	public double getRadius(){
+	   return radius;
+	}
+	
+	public double area(){
 		double pi = 3.14;
-		return (pi*r*r);
+		return (pi*radius*radius);
 	}
 	
 }
 
-class Rectangle extends Shape{
+class NonCircular extends Shape{
+
+	public double h;  
+	public double w; 
+
+	public void setValues(double height, double width){
+	    this.h = height;
+	    this.w = width;
+	}
+
+	public double getHeight(){
+	    return h;
+	}
+
+	public double getWidth(){
+	    return w;
+	}  
+
+}
+
+class Rectangle extends NonCircular{
 	
-	public double area(double w,double h){
-		return (w*h);
+	public double area(){
+		return (getHeight()*getWidth());
 	}
 }
 
-class Triangle extends Shape{ 
+class Triangle extends NonCircular{ 
 	
-    public double area(double w,double h) 
+    public double area() 
     {
-        return (w*h)/2;
+        return (getHeight()*getWidth())/2;
     }
     
 }  
 
-class Square extends Shape{
+class Square extends NonCircular{
 	
-	public double area(double w,double h){
-		return (w*h);
+	public double area(){
+		return (getHeight()*getWidth());
 	}
 	
 }
@@ -66,48 +93,52 @@ public class Areas {
 		
 		if(str.equals("Circle")){
 			System.out.println("Enter the radius:");
-			r = sc.nextFloat();
+			r = sc.nextDouble();
 			System.out.println("Enter the color:");
 			clr = sc.next();
 			Circle ci = new Circle();
 			shape = ci;
 			shape.setColor(clr);
+			ci.setRadius(r);
 			System.out.println("Color of the Triangle : " + shape.getColor());	
-			System.out.println("Area of the Triangle : " + ci.area(r,r));			
+			System.out.println("Area of the Triangle : " + ci.area());			
 		}else if(str.equals("Rectangle")){
 			System.out.println("Enter the breath:");
-			b = sc.nextFloat();
+			b = sc.nextDouble();
 			System.out.println("Enter the height:");
-			h = sc.nextFloat();
+			h = sc.nextDouble();
 			System.out.println("Enter the Color:");
 			clr = sc.next();
 			Rectangle rect = new Rectangle();
 			shape = rect;
 			shape.setColor(clr);
+			rect.setValues(h,b);
 			System.out.println("Color of the Rectangle : " + shape.getColor());	
-			System.out.println("Area of the Rectangle : " + rect.area(b,h));			
+			System.out.println("Area of the Rectangle : " + rect.area());			
 		}else if(str.equals("Triangle")){
 			System.out.println("Enter the breath:");
-			b = sc.nextFloat();
+			b = sc.nextDouble();
 			System.out.println("Enter the height:");
-			h = sc.nextFloat();
+			h = sc.nextDouble();
 			System.out.println("Enter the color:");
 			clr = sc.next();
 			Triangle tri = new Triangle();
 			shape = tri;
 			shape.setColor(clr);
+			tri.setValues(h,b);
 			System.out.println("Color of the Triangle : " + shape.getColor());
-			System.out.println("Area of the Triangle : " + tri.area(b,h));			
+			System.out.println("Area of the Triangle : " + tri.area());			
 		}else if(str.equals("Square")){
 			System.out.println("Enter the side:");
-			b = sc.nextFloat();
+			b = sc.nextDouble();
 			System.out.println("Enter the Color:");
 			clr = sc.next();
 			Square sq = new Square();
 			shape = sq;
 			shape.setColor(clr);
+			sq.setValues(b,b);
 			System.out.println("Color of the Square : " + shape.getColor());
-			System.out.println("Area of the Square : " + sq.area(b,b));			
+			System.out.println("Area of the Square : " + sq.area());			
 		}else{
 			System.out.println("Invalid Parameter");
 		}
